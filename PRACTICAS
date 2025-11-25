@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Sitio en Azure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature h3 {
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+        }
+        
+        .tech-stack {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .tech-item {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            margin: 0.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .deployed {
+            margin-top: 1rem;
+            font-style: italic;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 ¡Mi Sitio en Azure!</h1>
+        <p class="subtitle">Desplegado exitosamente con Azure Static Web Apps</p>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>✅ Frontend</h3>
+                <p>Azure Static Web Apps</p>
+                <p>HTML5 + CSS3 + JavaScript</p>
+            </div>
+            <div class="feature">
+                <h3>🗄️ Base de Datos</h3>
+                <p>Azure Cosmos DB</p>
+                <p>MongoDB Compatibility</p>
+            </div>
+            <div class="feature">
+                <h3>⚡ Características</h3>
+                <p>SSL Automático</p>
+                <p>CDN Global</p>
+            </div>
+        </div>
+        
+        <div class="tech-stack">
+            <h3>Tecnologías Utilizadas:</h3>
+            <span class="tech-item">Azure</span>
+            <span class="tech-item">GitHub</span>
+            <span class="tech-item">HTML5</span>
+            <span class="tech-item">CSS3</span>
+            <span class="tech-item">MongoDB</span>
+        </div>
+        
+        <p class="deployed">✨ Sitio desplegado automáticamente desde GitHub</p>
+    </div>
+</body>
+</html>
