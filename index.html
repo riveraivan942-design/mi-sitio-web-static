@@ -1,26 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mi Portafolio</title>
+    <title>Login con Azure Static Web App</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        body { font-family: Arial; padding: 20px; }
+        .login-btn { 
+            display: block; 
+            margin: 15px 0; 
+            padding: 15px; 
+            text-decoration: none; 
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
         }
-        .nav { background: #0078d4; padding: 1rem; }
-        .nav a { color: white; margin: 0 1rem; text-decoration: none; }
+        .microsoft { background: #00A4EF; }
+        .google { background: #4285F4; }
+        .facebook { background: #1877F2; }
+        .logout { background: #DC3545; }
+        .user-info { 
+            background: #28A745; 
+            padding: 20px; 
+            color: white;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <a href="#inicio">Inicio</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
+    <h1>🔐 Autenticación con Azure Static Web App</h1>
     
-    <h1>Mi Portafolio</h1>
-    <p>Desarrollado con Azure Static Web Apps</p>
+    <div id="login-section">
+        <h2>Iniciar sesión con:</h2>
+        
+        <a href="/.auth/login/aad" class="login-btn microsoft">
+            🪟 Microsoft / Entra ID
+        </a>
+        
+        <a href="/.auth/login/google" class="login-btn google">
+            🔵 Google
+        </a>
+        
+        <a href="/.auth/login/facebook" class="login-btn facebook">
+            📘 Facebook
+        </a>
+    </div>
+    
+    <div id="user-section" class="user-info" style="display: none;">
+        <h2>✅ Usuario autenticado</h2>
+        <p><strong>Nombre:</strong> <span id="user-name"></span></p>
+        <p><strong>Email:</strong> <span id="user-email"></span></p>
+        <p><strong>Proveedor:</strong> <span id="user-provider"></span></p>
+        
+        <a href="/.auth/logout" class="login-btn logout">
+            🚪 Cerrar sesión
+        </a>
+    </div>
+    
+    <script>
+        // Obtener información del usuario autenticado
+        async function loadUserInfo() {
+            try {
+                const response = await fetch('/.auth/me');
+                const userData = await response.json();
+                
+                if (userData.clientPrincipal) {
+                    // Ocultar botones de login
+                    document.getElementById('login-section').style.display = 'none';
+                    
+                    // Mostrar información del usuario
+                    document.getElementById('user-section').style.display = 'block';
+                    document.getElementById('user-name').textContent = userData.clientPrincipal.userDetails;
+                    
+                    // Buscar email en claims
+                    const emailClaim = userData.clientPrincipal.claims.find(c => 
+                        c.typ === 'preferred_username' || c.typ === 'email'
+                    );
+                    document.getElementById('user-email').textContent = 
+                        emailClaim ? emailClaim.val : 'No disponible';
+                    
+                    // Determinar proveedor
+                    const provider = userData.clientPrincipal.identityProvider;
+                    document.getElementById('user-provider').textContent = 
+                        provider === 'aad' ? 'Microsoft' : 
+                        provider === 'google' ? 'Google' : 
+                        provider === 'facebook' ? 'Facebook' : provider;
+                }
+            } catch (error) {
+                console.log('Usuario no autenticado');
+            }
+        }
+        
+        // Cargar información al inicio
+        loadUserInfo();
+        
+        // Actualizar cada 5 segundos (para ver cambios de login/logout)
+        setInterval(loadUserInfo, 5000);
+    </script>
+    
+    <hr>
+    <h3>📋 URLs disponibles:</h3>
+    <ul>
+        <li><a href="/.auth/login/aad">/.auth/login/aad</a> - Login Microsoft</li>
+        <li><a href="/.auth/login/google">/.auth/login/google</a> - Login Google</li>
+        <li><a href="/.auth/login/facebook">/.auth/login/facebook</a> - Login Facebook</li>
+        <li><a href="/.auth/me">/.auth/me</a> - Información del usuario</li>
+        <li><a href="/.auth/logout">/.auth/logout</a> - Cerrar sesión</li>
+    </ul>
 </body>
 </html>
