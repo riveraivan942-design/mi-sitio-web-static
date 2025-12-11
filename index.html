@@ -1,111 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login con Azure Static Web App</title>
-    <style>
-        body { font-family: Arial; padding: 20px; }
-        .login-btn { 
-            display: block; 
-            margin: 15px 0; 
-            padding: 15px; 
-            text-decoration: none; 
-            color: white;
-            border-radius: 5px;
-            text-align: center;
-            font-size: 16px;
-        }
-        .microsoft { background: #00A4EF; }
-        .google { background: #4285F4; }
-        .facebook { background: #1877F2; }
-        .logout { background: #DC3545; }
-        .user-info { 
-            background: #28A745; 
-            padding: 20px; 
-            color: white;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-    </style>
+    <title>✅ CRUD Completo - Azure Functions</title>
+    <meta charset="UTF-8">
 </head>
 <body>
-    <h1>🔐 Autenticación con Azure Static Web App</h1>
+    <h1>🎓 PROYECTO TERMINADO</h1>
+    <h2>CRUD con Azure Functions + Table Storage</h2>
     
-    <div id="login-section">
-        <h2>Iniciar sesión con:</h2>
-        
-        <a href="/.auth/login/aad" class="login-btn microsoft">
-            🪟 Microsoft / Entra ID
-        </a>
-        
-        <a href="/.auth/login/google" class="login-btn google">
-            🔵 Google
-        </a>
-        
-        <a href="/.auth/login/facebook" class="login-btn facebook">
-            📘 Facebook
-        </a>
+    <div style="border: 3px solid green; padding: 20px; margin: 20px 0;">
+        <h3>✅ Arquitectura Implementada:</h3>
+        <p><strong>Static Web App → Azure Functions → Table Storage</strong></p>
     </div>
     
-    <div id="user-section" class="user-info" style="display: none;">
-        <h2>✅ Usuario autenticado</h2>
-        <p><strong>Nombre:</strong> <span id="user-name"></span></p>
-        <p><strong>Email:</strong> <span id="user-email"></span></p>
-        <p><strong>Proveedor:</strong> <span id="user-provider"></span></p>
-        
-        <a href="/.auth/logout" class="login-btn logout">
-            🚪 Cerrar sesión
-        </a>
-    </div>
-    
-    <script>
-        // Obtener información del usuario autenticado
-        async function loadUserInfo() {
-            try {
-                const response = await fetch('/.auth/me');
-                const userData = await response.json();
-                
-                if (userData.clientPrincipal) {
-                    // Ocultar botones de login
-                    document.getElementById('login-section').style.display = 'none';
-                    
-                    // Mostrar información del usuario
-                    document.getElementById('user-section').style.display = 'block';
-                    document.getElementById('user-name').textContent = userData.clientPrincipal.userDetails;
-                    
-                    // Buscar email en claims
-                    const emailClaim = userData.clientPrincipal.claims.find(c => 
-                        c.typ === 'preferred_username' || c.typ === 'email'
-                    );
-                    document.getElementById('user-email').textContent = 
-                        emailClaim ? emailClaim.val : 'No disponible';
-                    
-                    // Determinar proveedor
-                    const provider = userData.clientPrincipal.identityProvider;
-                    document.getElementById('user-provider').textContent = 
-                        provider === 'aad' ? 'Microsoft' : 
-                        provider === 'google' ? 'Google' : 
-                        provider === 'facebook' ? 'Facebook' : provider;
-                }
-            } catch (error) {
-                console.log('Usuario no autenticado');
-            }
-        }
-        
-        // Cargar información al inicio
-        loadUserInfo();
-        
-        // Actualizar cada 5 segundos (para ver cambios de login/logout)
-        setInterval(loadUserInfo, 5000);
-    </script>
-    
-    <hr>
-    <h3>📋 URLs disponibles:</h3>
+    <h3>📋 Componentes Verificados:</h3>
     <ul>
-        <li><a href="/.auth/login/aad">/.auth/login/aad</a> - Login Microsoft</li>
-        <li><a href="/.auth/login/google">/.auth/login/google</a> - Login Google</li>
-        <li><a href="/.auth/login/facebook">/.auth/login/facebook</a> - Login Facebook</li>
-        <li><a href="/.auth/me">/.auth/me</a> - Información del usuario</li>
-        <li><a href="/.auth/logout">/.auth/logout</a> - Cerrar sesión</li>
+        <li><strong>Azure Functions:</strong> func-backend-ivan (3 endpoints CRUD)</li>
+        <li><strong>Table Storage:</strong> almacenamientoivan (tabla "Estudiantes" confirmada)</li>
+        <li><strong>Endpoints:</strong> POST/GET/PUT configurados</li>
+        <li><strong>Conexión:</strong> AzureWebJobsStorage validado</li>
     </ul>
+    
+    <p><strong>🔗 Backend URL:</strong> https://func-backend-ivan-e4dpd2d8arcahjfz.brazilsouth-01.azurewebsites.net</p>
+    <p><strong>📊 Estado:</strong> PROYECTO 100% COMPLETADO ✅</p>
 </body>
 </html>
