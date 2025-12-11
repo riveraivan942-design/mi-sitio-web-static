@@ -1,23 +1,8 @@
 {
   "routes": [
     {
-      "route": "/index.html",
-      "methods": [
-        "get"
-      ],
-      "allowedRoles": [
-        "anonymous"
-      ]
-    },
-    {
       "route": "/*",
-      "methods": [
-        "get"
-      ],
-      "statusCode": 200,
-      "allowedRoles": [
-        "anonymous"
-      ]
+      "allowedRoles": ["anonymous"]
     }
   ]
 }
